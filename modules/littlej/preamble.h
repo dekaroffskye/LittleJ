@@ -30,11 +30,14 @@ struct jh_s {
 };
 typedef jh_s jh_t; /* this is when a jh is interpreted, ok? otherwise it;s short */
 
-/** instanced */
+/** instanced data */
 struct ji {
   jh id;
-  jv point;
-}
+  jh meta;
+  jh inner; /** inner structure of this instanced data */
+  jv self;
+  
+};
 /** main library object which lives and is a SINGLE GLBOAL TOA NTYHING! *
 */
 struct ja {
