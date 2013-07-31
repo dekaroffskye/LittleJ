@@ -9,33 +9,53 @@ I also don;t care about whether I've got 32 or 64 bit ints ... sorry not my
 style to use more than 16 ppl!
 **/
 
-typedef long jint; /** hacks... */
-typedef unsigned long jintu;
-typedef unsigned char jbyte; /** 1 byte */
-typedef unsigned char joctet; /** 8 bit sequence */
-typedef unsigned short jsymu; /** Unsigned Symbol... */
+typedef long aint; /** hacks... */
+typedef unsigned long aintu;
 
-typedef short jsym; /** Symbol main thingy for charring() */
-typedef long jword; /** Wyrd... a kind of a symbol... a word glyph .. contains two symbols at least ... */
-typedef long long jglyph; /** a glyph... don't ask it's a structure just as the {jword}... predicato predicato precdicato */
-typedef jglyph jtext;
-typedef jglyph jtext;
+typedef unsigned char octet; /** 8 bit sequence */
+typedef short sym; /** Symbol main thingy for charring() */
+typedef long word; /** Wyrd... a kind of a symbol... a word glyph .. contains two symbols at least ... */
+typedef long long glyph; /** a glyph... don't ask it's a structure just as the {word}... predicato predicato precdicato */
 
-typedef void* jv; /** data/code, value instance */
-typedef jsym jk; /** meta information about instanced data, key (to structure information and so on ) */
-typedef long  jf; /** data/code, format hint.. a hack,sorry bout that ;) */
+typedef unsigned sym symu; /** Unsigned Symbol... */
+typedef unsigned word wordu; /** Wyrd... a kind of a symbol... a word glyph .. contains two symbols at least ... */
+
+typedef glyph value; /** data/code, value instance */
+typedef sym key; /** meta information about instanced data, key (to structure information and so on ) */
+typedef word  hint; /** data/code, format hint.. a hack,sorry bout that ;) */
+
+
+/** this is the basic language of this lib... please keep this paradise klean, ok? */
+typedef glyph (*form)(glyph d); /** form... (acquire data format OR transform OR functional transform) */
+typedef glyph (*binary)(glyph a, glyph b);
+typedef glyph (*tertiary)(glyph a, glyph b, glyph c);
+typedef glyph (*quad)(glyph a, glyph b, glyph c);
+
+typedef glyph* (*glyphs) (glyph a); /** this is empties a pool of glyphs each time called, depends on a single glyph
+
+/** meaning */
+typedef glyph (*string)(glyph obj, glyph meta);
+
+
+typedef glyph (*split)(string me);
+typedef glyph (*unit)(glyph sub, glyph pred, glyph obj);
+typedef glyph (*text)(string start, string end, string advance, split asplit)
+
+
+
+
 
 /** Handle to any data */
 struct jk_s {
-  joctet self;
-  joctet inner;
-  joctet other;
-  joctet meta;
+  octet self;
+  octet inner;
+  octet other;
+  octet meta;
 };
 typedef jk_s jk_t; /* this is when a jh is interpreted, ok? otherwise it;s short */
 
 struct jv_s {
-  jv meta;
+  jv meta; /** you get through meta in order to get your hands on self, ok? meta is a function.*/
   jv self;
 };
 
