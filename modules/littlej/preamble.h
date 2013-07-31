@@ -14,57 +14,49 @@ typedef unsigned long aintu;
 
 typedef unsigned char octet; /** 8 bit sequence */
 typedef short sym; /** Symbol main thingy for charring() */
-typedef long word; /** Wyrd... a kind of a symbol... a word glyph .. contains two symbols at least ... */
 typedef long long glyph; /** a glyph... don't ask it's a structure just as the {word}... predicato predicato precdicato */
-
-typedef unsigned sym symu; /** Unsigned Symbol... */
-typedef unsigned word wordu; /** Wyrd... a kind of a symbol... a word glyph .. contains two symbols at least ... */
+typedef glyph* segment;
 
 typedef glyph value; /** data/code, value instance */
-typedef sym key; /** meta information about instanced data, key (to structure information and so on ) */
-typedef word  hint; /** data/code, format hint.. a hack,sorry bout that ;) */
+typedef glyph  key; /** data/code, format hint.. a hack,sorry bout that ;) */
+typedef sym hint; /** Handle to a data/code */
 
+struct thang_s {
+  sym hint;
+  key k;
+  value v;
+};
+typedef thang_s thang;
 
-/** this is the basic language of this lib... please keep this paradise klean, ok? */
-typedef glyph (*form)(glyph d); /** form... (acquire data format OR transform OR functional transform) */
-typedef glyph (*binary)(glyph a, glyph b);
-typedef glyph (*tertiary)(glyph a, glyph b, glyph c);
-typedef glyph (*quad)(glyph a, glyph b, glyph c);
-
-typedef glyph* (*glyphs) (glyph a); /** this is empties a pool of glyphs each time called, depends on a single glyph
-
-/** meaning */
-typedef glyph (*string)(glyph obj, glyph meta);
-
-
-typedef glyph (*split)(string me);
-typedef glyph (*unit)(glyph sub, glyph pred, glyph obj);
-typedef glyph (*text)(string start, string end, string advance, split asplit)
-
-
-
+struct thing_s {
+  sym hint;
+  key k;
+};
+typedef thing_s thing;
 
 
 /** Handle to any data */
-struct jk_s {
+/* this is when a jh is interpreted, ok? otherwise it;s short */
+struct key_s {
   octet self;
   octet inner;
   octet other;
   octet meta;
 };
-typedef jk_s jk_t; /* this is when a jh is interpreted, ok? otherwise it;s short */
+typedef key_s key_t; 
 
-struct jv_s {
-  jv meta; /** you get through meta in order to get your hands on self, ok? meta is a function.*/
-  jv self;
+/** basic value  */
+struct value_s {
+  value meta; /** you get through meta in order to get your hands on self, ok? meta is a function.*/
+  value self;
 };
 
 /** instanced data, value */
-struct jvi {
-  jk id;
-  jv self; /** pointer to the data */
-  jf inner; /** inner structure of this instanced data, identification */
-  jv other; /** meta information inside it after iterpret. */  
+struct valuei_ {
+  key id;
+  value self; /** pointer to the data */
+  hint inner; /** inner structure of this instanced data, identification */
+  value other; /** meta information inside it after iterpret. */  
 };
 
 /** instanced data, in(t)erpreted */
@@ -104,8 +96,21 @@ struct ja {
   j
 };
 
-ji 
-ja_init(
+/** this is the basic language of this lib... please keep this paradise klean, ok? */
+typedef glyph (*form)(glyph d); /** form... (acquire data format OR transform OR functional transform) */
+typedef glyph (*binary)(glyph a, glyph b);
+typedef glyph (*tertiary)(glyph a, glyph b, glyph c);
+typedef glyph (*quad)(glyph a, glyph b, glyph c);
+
+typedef glyph* (*string) (glyph a); /** this is empties a pool of glyphs each time called, depends on a single glyph */
+
+/** meaning */
+typedef glyph (*strings)(glyph a, value meta);
+
+
+typedef glyph (*split)(string me);
+typedef glyph (*unit)(glyph sub, glyph pred, glyph obj);
+typedef glyph (*text)(string start, string end, string advance, split asplit)
 
 
 #endif
