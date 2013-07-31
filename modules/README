@@ -1,0 +1,6 @@
+Modules contains a single directory of code named littlej which stands for Little John
+
+In this library the code and it's interface come along in the same folder... enough namespace polution!
+
+There are apropriately placed Makefiles, go find them, it should be easy :-)
+
