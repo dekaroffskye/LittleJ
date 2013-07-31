@@ -7,3 +7,5 @@ There are apropriately placed Makefiles, go find them, it should be easy :-)
 PS: This is experimental bullshit ;-)
 
 PS2: This state of being experimental... will stay F-O-R-E-V-E-R. Sorry bout that ;-)
+
+For now the library doesn't respect const-ness, sorry bout that ;-)
